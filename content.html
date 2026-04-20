@@ -28,6 +28,9 @@ body{background:#14100e;color:#f5efe4}
 .video-card{display:flex;flex-direction:column;gap:14px}
 .video-frame{position:relative;aspect-ratio:9/16;max-height:72vh;background:#2a221c;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5)}
 .video-frame video{width:100%;height:100%;object-fit:cover;background:#000}
+/* Ensure the poster image fills the frame the same way the playing video does
+   (some mobile browsers show a black gap otherwise). */
+.video-frame video::-webkit-media-controls-start-playback-button{opacity:1}
 .video-meta h3{margin:0;font-family:var(--serif-display);font-size:22px;font-style:italic;font-weight:600;color:#f5efe4}
 .video-meta p{margin:4px 0 0;font-family:var(--serif-text);color:#b9ad9d;font-size:15px;letter-spacing:.02em}
 @media (max-width:860px){.videos{grid-template-columns:1fr}}
@@ -57,11 +60,19 @@ body{background:#14100e;color:#f5efe4}
   </div>
   <div class="videos">
     <article class="video-card">
-      <div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/video-1.mp4" type="video/mp4"></video></div>
+      <div class="video-frame">
+        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-1.jpg">
+          <source src="assets/video-1.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="video-meta"><h3>The Space Between</h3><p>Brand content · Stumble</p></div>
     </article>
     <article class="video-card">
-      <div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/video-2.mp4" type="video/mp4"></video></div>
+      <div class="video-frame">
+        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-2.jpg">
+          <source src="assets/video-2.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="video-meta"><h3>The Stumble House Tour</h3><p>Brand content · Stumble</p></div>
     </article>
   </div>
@@ -72,11 +83,19 @@ body{background:#14100e;color:#f5efe4}
   </div>
   <div class="videos">
     <article class="video-card">
-      <div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/video-3.mp4" type="video/mp4"></video></div>
+      <div class="video-frame">
+        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-3.jpg">
+          <source src="assets/video-3.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="video-meta"><h3>Launch Night</h3><p>Event coverage · Stumble — 200+ attendees</p></div>
     </article>
     <article class="video-card">
-      <div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/video-4.mp4" type="video/mp4"></video></div>
+      <div class="video-frame">
+        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-4.jpg">
+          <source src="assets/video-4.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="video-meta"><h3>Event Feature</h3><p>Event coverage · Stumble</p></div>
     </article>
   </div>
