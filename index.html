@@ -301,23 +301,45 @@ body{overflow-y:auto}
   const skip = document.getElementById('skip');
   const hero = document.getElementById('hero');
 
+  // If user is returning to the bag (e.g. via "back to bag" from a subpage) OR
+  // has already watched the intro in this tab, skip straight to the content.
+  const hash = location.hash;
+  const returning =
+    hash === '#bag' || hash === '#hero' ||
+    sessionStorage.getItem('introSeen') === '1';
+
+  const markSeen = () => { try{ sessionStorage.setItem('introSeen','1'); }catch(e){} };
+
   const endIntro = (fast) => {
     if(fast){
       intro.classList.add('done');
       hero.classList.add('reveal');
+      markSeen();
       return;
     }
     // cinematic: pickup → flash → zoom/blur → reveal
     intro.classList.add('picking-up');
     setTimeout(()=>{ flash.classList.add('active'); }, 400);
     setTimeout(()=>{ intro.classList.add('zooming'); hero.classList.add('reveal'); }, 520);
-    setTimeout(()=>{ intro.classList.add('done'); }, 1500);
+    setTimeout(()=>{ intro.classList.add('done'); markSeen(); }, 1500);
     setTimeout(()=>{ flash.classList.remove('active'); }, 1500);
   };
 
-  phoneStage.addEventListener('click', ()=>endIntro(false));
-  skip.addEventListener('click', (e)=>{e.stopPropagation(); endIntro(true);});
-  setTimeout(()=>{ if(!intro.classList.contains('done') && !intro.classList.contains('zooming')) endIntro(false); }, 14000);
+  if(returning){
+    // Skip the phone-ringing intro instantly and jump to the requested section.
+    endIntro(true);
+    if(hash){
+      // Re-run scroll after the fixed intro is hidden so the browser lands on #bag.
+      requestAnimationFrame(()=>{
+        const target = document.querySelector(hash);
+        if(target) target.scrollIntoView({block:'start'});
+      });
+    }
+  } else {
+    phoneStage.addEventListener('click', ()=>endIntro(false));
+    skip.addEventListener('click', (e)=>{e.stopPropagation(); endIntro(true);});
+    setTimeout(()=>{ if(!intro.classList.contains('done') && !intro.classList.contains('zooming')) endIntro(false); }, 14000);
+  }
 
   // Render bag
   if(window.renderBag) window.renderBag(document.getElementById('bag-board'));
