@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor / local Claude settings
+.claude/settings.local.json
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Logs
+*.log

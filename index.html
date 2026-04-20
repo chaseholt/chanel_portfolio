@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chanel Holt — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;0,6..96,800;1,6..96,400;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Pinyon+Script&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/*EDITMODE-BEGIN*/
+/*EDITMODE-END*/
+html,body{height:100%;overflow-x:hidden}
+body{overflow-y:auto}
+
+/* ===== INTRO (ring) ===== */
+.intro{
+  position:fixed;inset:0;z-index:100;background:#fff;
+  display:grid;place-items:center;
+  transition:opacity .7s var(--ease),visibility .7s;
+  will-change:opacity,transform,filter;
+}
+.intro.zooming{
+  animation:introZoom 1s cubic-bezier(.6,0,.4,1) forwards;
+}
+.intro.done{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes introZoom{
+  0%{transform:scale(1);filter:blur(0)}
+  60%{transform:scale(2.2);filter:blur(6px);opacity:1}
+  100%{transform:scale(3.6);filter:blur(22px);opacity:0}
+}
+.skip{
+  position:absolute;top:24px;right:30px;
+  font-family:var(--serif-text);font-size:13px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--muted);
+}
+.skip:hover{color:var(--red)}
+.phone-stage{position:relative;display:grid;place-items:center;gap:26px;width:min(560px,90vw)}
+.ring-caption{
+  font-family:var(--serif-display);font-size:clamp(22px,3.2vw,34px);
+  font-style:italic;font-weight:400;color:var(--ink-soft);
+  margin:0;letter-spacing:.01em;
+  opacity:0;animation:fadeUp .9s .2s var(--ease) forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.phone-img-wrap{position:relative;width:min(340px,62vw);aspect-ratio:1;display:grid;place-items:center}
+.phone-img-wrap img{
+  width:100%;height:100%;object-fit:contain;
+  transform-origin:60% 70%;
+  animation:ring 1.8s var(--ease) infinite;
+}
+.intro.picking-up .phone-img-wrap img{animation:pickup .55s cubic-bezier(.4,1.5,.5,1) forwards}
+@keyframes pickup{
+  0%{transform:rotate(0) scale(1)}
+  30%{transform:rotate(-22deg) scale(1.08)}
+  70%{transform:rotate(10deg) scale(1.2) translateY(-10px)}
+  100%{transform:rotate(-6deg) scale(1.4) translateY(-40px);opacity:.2}
+}
+.ring-prompt{
+  display:flex;align-items:center;gap:10px;color:var(--red);
+  font-family:var(--serif-text);font-size:15px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  opacity:0;animation:fadeUp .9s .5s var(--ease) forwards;
+}
+.ring-prompt .dot{width:8px;height:8px;border-radius:999px;background:var(--red);animation:pulse 1.2s ease-in-out infinite}
+@keyframes ring{
+  0%,60%,100%{transform:rotate(0)}
+  6%,18%,30%,42%{transform:rotate(-7deg)}
+  12%,24%,36%,48%{transform:rotate(7deg)}
+}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.2)}}
+.pulse-ring{position:absolute;inset:0;pointer-events:none;display:grid;place-items:center}
+.pulse-ring span{
+  position:absolute;width:56%;aspect-ratio:1;border-radius:999px;
+  border:1px solid var(--rose);opacity:0;
+  animation:pulsate 2s var(--ease) infinite;
+}
+.pulse-ring span:nth-child(2){animation-delay:.45s}
+.pulse-ring span:nth-child(3){animation-delay:.9s}
+@keyframes pulsate{0%{transform:scale(.4);opacity:0}30%{opacity:.5}100%{transform:scale(2);opacity:0}}
+
+/* Flash */
+.flash{position:fixed;inset:0;z-index:101;background:#fff;opacity:0;pointer-events:none}
+.flash.active{animation:flash .9s ease-out}
+@keyframes flash{
+  0%{opacity:0}
+  15%{opacity:1}
+  50%{opacity:.85}
+  100%{opacity:0}
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;height:100vh;width:100%;
+  overflow:hidden;background:#cfc7bf;
+}
+/* Background portrait — clean portrait image (no baked text); HTML overlay handles branding. */
+.hero-img{
+  position:absolute;inset:0;
+  background:url('assets/chanel-portrait.png') center/cover no-repeat;
+  background-position:50% 30%;
+  transform:scale(1.05);filter:brightness(.78) saturate(1.05);
+}
+.hero.reveal .hero-img{
+  animation:kenburn 7s var(--ease) forwards;
+}
+@keyframes kenburn{
+  0%{transform:scale(1.18);filter:brightness(.9) blur(6px) saturate(1.05)}
+  20%{filter:brightness(.82) blur(0) saturate(1.05)}
+  100%{transform:scale(1.05);filter:brightness(.72) blur(0) saturate(1.05)}
+}
+.hero-vignette{
+  position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 50%, rgba(0,0,0,.45) 0%, rgba(0,0,0,.15) 55%, transparent 80%),
+    linear-gradient(180deg,rgba(0,0,0,.2) 0%,transparent 30%,transparent 65%,rgba(0,0,0,.4) 100%);
+}
+/* HTML text overlay — always shown, giving consistent branding across viewports */
+.hero-overlay{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:0 24px;text-align:center;
+  opacity:0;
+}
+.hero.reveal .hero-overlay{animation:fadeUp 1s .4s var(--ease) forwards}
+.hero-overlay .hero-name{
+  margin:0;font-family:var(--script);font-weight:400;
+  font-size:clamp(64px,12vw,170px);line-height:.95;color:#fff;
+  text-shadow:0 6px 30px rgba(0,0,0,.55),0 2px 10px rgba(0,0,0,.45);
+  letter-spacing:.01em;
+}
+.hero-overlay .hero-tag{
+  margin:0;font-family:var(--serif-text);font-style:italic;font-weight:500;
+  font-size:clamp(18px,2.4vw,28px);color:#ffd5c4;
+  text-shadow:0 2px 14px rgba(0,0,0,.75);
+  letter-spacing:.05em;
+}
+/* Mobile-like portrait viewports need tighter crop around face */
+@media (max-aspect-ratio: 3/4){
+  .hero-img{background-position:50% 20%}
+}
+.hero-scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--serif-text);font-size:13px;letter-spacing:.28em;text-transform:uppercase;
+  color:#fff;mix-blend-mode:difference;
+  animation:bob 2.4s var(--ease) infinite;opacity:0;
+}
+.hero.reveal .hero-scroll-hint{animation:bob 2.4s var(--ease) infinite, fadeUp 1s 1.2s var(--ease) forwards}
+.hero-scroll-hint svg{width:16px;height:26px;stroke:#fff;fill:none;stroke-width:1.5}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ===== BAG ===== */
+.bag{
+  min-height:100vh;padding:100px 40px 120px;
+  background:var(--cream);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.bag-head{text-align:center;margin-bottom:30px}
+.bag-head p{margin:0}
+.bag-head h1{
+  margin:6px 0 0;
+  font-family:var(--serif-display);
+  font-size:clamp(44px,7vw,92px);
+  font-style:italic;font-weight:600;letter-spacing:-.01em;line-height:1;
+}
+.bag-board{
+  position:relative;width:min(1280px,100%);aspect-ratio: 16/9;
+}
+.bag-center{
+  position:absolute;left:50%;top:50%;
+  width:34%;
+  translate:-50% -50%;
+  animation:bagFloat 6s ease-in-out infinite;
+}
+@keyframes bagFloat{0%,100%{translate:-50% -50%}50%{translate:-50% -52%}}
+.bag-center .tote-img{
+  width:100%;height:auto;display:block;
+  filter:drop-shadow(0 40px 50px rgba(20,15,10,.3));
+}
+.bag-item{
+  position:absolute;display:flex;flex-direction:column;align-items:center;gap:10px;
+  cursor:pointer;transition:transform .4s var(--ease);text-align:center;
+  text-decoration:none;color:var(--ink);
+  --float-amp:6px;
+  --float-dur:5s;
+  --float-delay:0s;
+  translate:-50% -50%;
+}
+.bag-item .float{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  animation:itemFloat var(--float-dur) ease-in-out var(--float-delay) infinite;
+}
+@keyframes itemFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(calc(var(--float-amp) * -1))}
+}
+.bag-item:hover{transform:scale(1.08);z-index:5}
+.bag-item .icon-wrap{
+  display:grid;place-items:center;
+  width:var(--size,150px);height:var(--size,150px);
+}
+.bag-item img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 16px 22px rgba(20,15,10,.22));
+  transition:filter .3s var(--ease);
+}
+.bag-item:hover img{filter:drop-shadow(0 24px 30px rgba(20,15,10,.32))}
+.bag-item .label{
+  font-family:var(--serif-display);font-size:clamp(18px,1.7vw,24px);
+  font-style:normal;font-weight:400;
+  letter-spacing:.005em;line-height:1.2;
+  white-space:nowrap;
+  color:var(--ink);
+}
+
+/* Symmetric 3-left / 3-right layout around the tote, matching the reference */
+.bag-item.content-item   {left:30%; top:24%; --size:165px; --float-amp:8px;  --float-dur:5.5s; --float-delay:0s}
+.bag-item.skills-item    {left:70%; top:22%; --size:150px; --float-amp:10px; --float-dur:4.8s; --float-delay:.4s}
+.bag-item.about-item     {left:18%; top:50%; --size:120px; --float-amp:7px;  --float-dur:5.2s; --float-delay:.8s}
+.bag-item.events-item    {left:82%; top:50%; --size:140px; --float-amp:9px;  --float-dur:6s;   --float-delay:.2s}
+.bag-item.experience-item{left:18%; top:78%; --size:155px; --float-amp:11px; --float-dur:5.6s; --float-delay:.6s}
+.bag-item.contact-item   {left:82%; top:78%; --size:150px; --float-amp:7px;  --float-dur:5s;   --float-delay:.3s}
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 641px){
+  .bag-board{aspect-ratio: 4/5;width:100%;max-width:720px}
+  .bag-center{width:42%}
+  .bag-item{--size:110px!important}
+  .bag-item .label{font-size:16px}
+  .bag-item.content-item   {left:25%; top:14%}
+  .bag-item.skills-item    {left:75%; top:14%}
+  .bag-item.about-item     {left:15%; top:44%}
+  .bag-item.events-item    {left:85%; top:44%}
+  .bag-item.experience-item{left:18%; top:78%}
+  .bag-item.contact-item   {left:82%; top:78%}
+}
+/* Mobile */
+@media (max-width: 640px){
+  .bag{padding:60px 12px 80px}
+  .bag-board{aspect-ratio:3/4;width:100%}
+  .bag-center{width:50%}
+  .bag-item{--size:78px!important}
+  .bag-item .label{font-size:13px}
+  .bag-item.content-item   {left:28%; top:11%}
+  .bag-item.skills-item    {left:72%; top:11%}
+  .bag-item.about-item     {left:14%; top:44%}
+  .bag-item.events-item    {left:86%; top:44%}
+  .bag-item.experience-item{left:18%; top:80%}
+  .bag-item.contact-item   {left:82%; top:80%}
+}
+
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <button class="skip" id="skip">Skip intro →</button>
+  <div class="phone-stage" id="phone-stage">
+    <div class="pulse-ring"><span></span><span></span><span></span></div>
+    <p class="ring-caption">someone's calling…</p>
+    <div class="phone-img-wrap">
+      <img src="assets/red-phone.png" alt="Ringing red rotary phone">
+    </div>
+    <div class="ring-prompt"><span class="dot"></span><span>Click to answer</span></div>
+  </div>
+</div>
+<div class="flash" id="flash"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-img"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-overlay" aria-hidden="true">
+    <h1 class="hero-name">Chanel Holt</h1>
+    <p class="hero-tag">your next marketing girly</p>
+  </div>
+  <a class="hero-scroll-hint" href="#bag">
+    <span>Scroll</span>
+    <svg viewBox="0 0 16 26"><rect x="1" y="1" width="14" height="24" rx="7"/><circle cx="8" cy="8" r="1.5" fill="#fff" stroke="none"/></svg>
+  </a>
+</section>
+
+<!-- BAG -->
+<section class="bag" id="bag">
+  <div class="bag-head">
+    <p class="eyebrow">inside the tote</p>
+    <h1>what's in my bag?</h1>
+  </div>
+  <div class="bag-board" id="bag-board"></div>
+</section>
+
+<script src="bag.js"></script>
+<script>
+(function(){
+  const intro = document.getElementById('intro');
+  const phoneStage = document.getElementById('phone-stage');
+  const flash = document.getElementById('flash');
+  const skip = document.getElementById('skip');
+  const hero = document.getElementById('hero');
+
+  const endIntro = (fast) => {
+    if(fast){
+      intro.classList.add('done');
+      hero.classList.add('reveal');
+      return;
+    }
+    // cinematic: pickup → flash → zoom/blur → reveal
+    intro.classList.add('picking-up');
+    setTimeout(()=>{ flash.classList.add('active'); }, 400);
+    setTimeout(()=>{ intro.classList.add('zooming'); hero.classList.add('reveal'); }, 520);
+    setTimeout(()=>{ intro.classList.add('done'); }, 1500);
+    setTimeout(()=>{ flash.classList.remove('active'); }, 1500);
+  };
+
+  phoneStage.addEventListener('click', ()=>endIntro(false));
+  skip.addEventListener('click', (e)=>{e.stopPropagation(); endIntro(true);});
+  setTimeout(()=>{ if(!intro.classList.contains('done') && !intro.classList.contains('zooming')) endIntro(false); }, 14000);
+
+  // Render bag
+  if(window.renderBag) window.renderBag(document.getElementById('bag-board'));
+})();
+</script>
+</body>
+</html>

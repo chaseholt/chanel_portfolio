@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Education — Chanel Holt</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:var(--cream)}
+.edu-wrap{padding:40px 40px 140px;max-width:980px;margin:0 auto}
+.edu-wrap .eyebrow{margin-bottom:0}
+.edu-wrap h1.display{margin-bottom:40px}
+.edu-card{
+  position:relative;padding:48px 52px;
+  background:#fff;border:1px solid var(--line);
+  box-shadow:0 24px 48px rgba(20,15,10,.06);
+  margin-bottom:32px;
+}
+.edu-card .crest{
+  position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  width:40px;height:40px;display:grid;place-items:center;
+  background:var(--cream);border:1px solid var(--line);border-radius:999px;
+  font-family:var(--serif-display);font-style:italic;font-weight:700;color:var(--red);
+}
+.edu-card h2{
+  font-family:var(--serif-display);font-size:32px;font-weight:700;font-style:italic;
+  margin:0 0 6px;letter-spacing:-.01em;
+}
+.edu-card .degree{
+  font-family:var(--serif-text);font-size:21px;color:var(--ink);margin:0 0 4px;
+}
+.edu-card .meta{
+  font-family:var(--serif-text);font-size:16px;color:var(--muted);letter-spacing:.08em;
+  text-transform:uppercase;margin:0 0 18px;
+}
+.edu-card ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.edu-card li{
+  font-family:var(--serif-text);font-size:17px;color:var(--ink-soft);padding-left:22px;position:relative;
+}
+.edu-card li::before{content:"";position:absolute;left:0;top:.7em;width:12px;height:1px;background:var(--red)}
+.honors{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:14px;padding:6px 14px;border:1px solid var(--red);border-radius:999px;
+  font-family:var(--serif-text);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);
+}
+.honors::before{content:"✦";font-size:14px}
+@media (max-width:860px){
+  .edu-card{padding:36px 26px}
+  .edu-wrap{padding:30px 20px 100px}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html">Chanel</a>
+  <ul>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="education.html">Education</a></li>
+    <li><a href="content.html">Content</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+<main class="page edu-wrap">
+  <p class="eyebrow">where it all began</p>
+  <h1 class="display italic">Education</h1>
+
+  <article class="edu-card">
+    <div class="crest">U</div>
+    <h2>Utah Valley University</h2>
+    <p class="degree">B.S. Digital Marketing &middot; Spring 2026</p>
+    <p class="degree">B.S. Accounting &middot; Spring 2027 <em style="color:var(--muted);font-style:italic">(in progress)</em></p>
+    <p class="meta">Dual-degree focus</p>
+    <ul>
+      <li>Pairs creative marketing strategy with financial analytics</li>
+      <li>Associate of Science earned en route</li>
+      <li>Active in UVU marketing and sales programs</li>
+    </ul>
+    <span class="honors">Dean's List — 2023, 2024, 2025</span>
+  </article>
+
+  <article class="edu-card">
+    <div class="crest">C</div>
+    <h2>Corner Canyon High School</h2>
+    <p class="degree">High School Diploma</p>
+    <p class="meta">Graduated 2022</p>
+    <ul>
+      <li>Dance program leadership and performance</li>
+      <li>Foundations in business and communications</li>
+    </ul>
+  </article>
+</main>
+<a class="back-to-bag" href="index.html#bag">
+  <svg viewBox="0 0 16 16"><path d="M10 3 L4 8 L10 13"/></svg>
+  <span>back to bag</span>
+</a>
+<script src="shared.js"></script>
+</body>
+</html>
