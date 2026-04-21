@@ -119,19 +119,30 @@ body{overflow-y:auto}
 .hero-name-right{
   position:absolute;
   font-family:var(--script);font-weight:400;
-  font-size:clamp(72px,13vw,190px);line-height:1;
+  font-size:clamp(72px,13vw,210px);line-height:1;
   color:#fff;
   text-shadow:0 4px 28px rgba(0,0,0,.4);
-  top:40%;transform:translateY(-50%);
+  top:22%;transform:translateY(-50%);
   z-index:2;
+  white-space:nowrap;
 }
-.hero-name-left{left:3vw}
-.hero-name-right{right:3vw}
+/* Right edge of "Chanel" sits just left of center — text grows leftward */
+.hero-name-left{
+  right:53%;
+  text-align:right;
+}
+/* Left edge of "Holt" sits just right of center — text grows rightward */
+.hero-name-right{
+  left:53%;
+  text-align:left;
+}
 
 .hero-tag{
   position:absolute;
-  left:3vw;
-  top:calc(40% + clamp(72px,13vw,190px) * .55);
+  /* Align right edge with "Chanel" so they sit flush */
+  right:53%;
+  top:calc(22% + clamp(72px,13vw,210px) * .52);
+  text-align:right;
   font-family:var(--serif-text);font-style:italic;font-weight:500;
   font-size:clamp(16px,2vw,26px);
   color:#c0291c;
@@ -255,8 +266,8 @@ body{overflow-y:auto}
 }
 
 @media (max-width:860px){
-  .hero-name-left,.hero-name-right{font-size:clamp(52px,11vw,120px)}
-  .hero-tag{font-size:clamp(12px,2.8vw,16px)}
+  .hero-name-left,.hero-name-right{font-size:clamp(44px,10vw,100px);top:18%}
+  .hero-tag{font-size:clamp(12px,2.8vw,16px);top:calc(18% + clamp(44px,10vw,100px) * .52)}
 }
 </style>
 </head>

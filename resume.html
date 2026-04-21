@@ -10,29 +10,30 @@
 html,body{min-height:100%;margin:0;padding:0}
 body{background:var(--red);color:#f6eee4;overflow-x:hidden}
 
+/* ─── Two-column page ─── */
 .resume-page{
   display:grid;
   grid-template-columns:1fr 1fr;
   min-height:100vh;
-  align-items:stretch;
 }
 
-/* ── Left panel ── */
+/* ─── LEFT: heading + full-height cutout ─── */
 .resume-left{
   position:relative;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;align-items:flex-start;
-  padding-top:92px;overflow:hidden;
+  min-height:100vh;
+  overflow:hidden;
 }
 
 .resume-heading{
   position:absolute;
-  top:50%;transform:translateY(-60%);
-  left:8%;z-index:2;pointer-events:none;
+  top:50%;transform:translateY(-55%);
+  left:8%;z-index:3;pointer-events:none;
+  line-height:1.1;
 }
 .resume-script{
   display:block;font-family:var(--script);
-  font-size:clamp(52px,6.5vw,96px);color:#f6eee4;line-height:1.05;
+  font-size:clamp(52px,6.5vw,96px);
+  color:#f6eee4;line-height:1.05;
 }
 .resume-bold{
   display:block;font-family:var(--serif-display);
@@ -40,79 +41,92 @@ body{background:var(--red);color:#f6eee4;overflow-x:hidden}
   color:#f6eee4;line-height:1;
 }
 
-/* Cutout — almost as tall as the frame on the right */
+/* Cutout: fills nearly the full left panel height, anchored to bottom */
 .resume-cutout{
-  position:relative;z-index:1;
-  width:auto;
-  /* fills from bottom of panel; height keyed to vh so it matches the frame height */
-  height:calc(100vh - 92px);
-  align-self:flex-end;
-  margin-left:5%;
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:92%;
+  display:flex;align-items:flex-end;justify-content:center;
+  z-index:2;
 }
 .resume-cutout img{
-  height:100%;width:auto;display:block;
-  object-fit:contain;object-position:bottom left;
-  filter:drop-shadow(0 -8px 30px rgba(0,0,0,.3));
+  height:100%;width:auto;
+  display:block;
+  object-fit:contain;object-position:bottom center;
+  filter:drop-shadow(0 0 30px rgba(0,0,0,.3));
 }
 
-/* ── Right panel ── */
+/* ─── RIGHT: download + framed PDF ─── */
 .resume-right{
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:100px 6% 60px 4%;
-  gap:20px;
+  padding:108px 5% 60px;
+  gap:18px;
 }
 
 .download{
   display:inline-flex;align-items:center;gap:10px;
   padding:10px 24px;border:1px solid #e9c77a;border-radius:999px;
   font-family:var(--serif-text);font-size:13px;letter-spacing:.25em;text-transform:uppercase;
-  color:#e9c77a;transition:all .25s var(--ease);
+  color:#e9c77a;transition:all .25s var(--ease);flex-shrink:0;
 }
 .download:hover{background:#e9c77a;color:var(--red)}
 .download svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
 
-/* ── Transparent image frame ── */
+/* ─── Frame + iframe stacking ─── */
+/*
+  transparent-frame.png: 3277×4096 (ratio ~0.8)
+  Frame opening inset (estimated from image inspection):
+    top: ~12%  bottom: ~14%  left: ~15%  right: ~15%
+  → iframe: top:12%, left:15%, width:70%, height:74%
+*/
 .frame-wrap{
   position:relative;
-  width:100%;
-}
-/* The frame image sits on top of the PDF via z-index */
-.frame-img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:fill;
-  z-index:2;pointer-events:none;
-  /* frame has slight shadow */
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.5));
-}
-/* PDF iframe sits behind the frame image; inset to land inside the frame opening */
-/* transparent-frame.webp opening is approx 14% from each side, 16% top, 14% bottom */
-.pdf-frame{
-  position:relative;z-index:1;
-  display:block;
-  width:76%;
-  aspect-ratio:8.5/11;
-  border:0;
-  background:#fbf7ed;
-  margin:0 auto;
-  /* push it down to sit inside the frame opening */
-  margin-top:14%;margin-bottom:10%;
+  width:min(420px,80%);
+  /* Lock height to the frame image's natural ratio so iframe % values stay correct */
+  aspect-ratio:3277/4096;
 }
 
+/* PDF iframe lives BEHIND the frame image */
+.pdf-frame{
+  position:absolute;
+  top:12%;left:15%;
+  width:70%;height:74%;
+  border:0;
+  background:#fff;
+  z-index:1;
+  display:block;
+}
+
+/* Frame image overlaid on top — transparent PNG opening reveals iframe */
+.frame-img{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:fill;
+  z-index:2;
+  pointer-events:none;
+  display:block;
+  /* drop shadow gives the frame depth */
+  filter:drop-shadow(0 20px 50px rgba(0,0,0,.55));
+}
+
+/* ─── Mobile ─── */
 @media (max-width:860px){
   .resume-page{
     grid-template-columns:1fr;
     min-height:auto;
   }
   .resume-left{
-    flex-direction:row;align-items:flex-end;justify-content:flex-start;
-    gap:16px;padding:76px 20px 0;min-height:42vh;overflow:visible;
+    min-height:52vh;
   }
-  .resume-heading{position:static;transform:none;flex-shrink:0}
-  .resume-cutout{height:36vh;margin-left:auto;margin-right:0}
-  .resume-right{padding:30px 16px 80px}
-  .pdf-frame{margin-top:12%;margin-bottom:8%}
+  .resume-heading{
+    top:30%;transform:translateY(-50%);
+    left:6%;
+  }
+  .resume-cutout{height:75%}
+  .resume-right{padding:40px 16px 80px}
+  .frame-wrap{width:min(320px,90%)}
 }
 </style>
 </head>
@@ -134,6 +148,8 @@ body{background:var(--red);color:#f6eee4;overflow-x:hidden}
 </nav>
 
 <main class="resume-page">
+
+  <!-- LEFT: cutout photo fills the panel -->
   <div class="resume-left">
     <div class="resume-heading">
       <span class="resume-script">Check out</span>
@@ -144,16 +160,24 @@ body{background:var(--red);color:#f6eee4;overflow-x:hidden}
     </div>
   </div>
 
+  <!-- RIGHT: framed PDF -->
   <div class="resume-right">
     <a class="download" href="assets/resume.pdf" download>
       <svg viewBox="0 0 16 16"><path d="M8 2v10M4 8l4 4 4-4M2 14h12"/></svg>
       <span>Download PDF</span>
     </a>
     <div class="frame-wrap">
-      <iframe class="pdf-frame" src="assets/resume.pdf#view=FitH&toolbar=0" title="Chanel Holt Resume"></iframe>
-      <img class="frame-img" src="assets/transparent-frame.webp" alt="">
+      <!-- iframe behind the transparent frame -->
+      <iframe
+        class="pdf-frame"
+        src="assets/resume.pdf#view=FitH&toolbar=0"
+        title="Chanel Holt Resume">
+      </iframe>
+      <!-- gold frame overlaid; transparent PNG opening reveals iframe -->
+      <img class="frame-img" src="assets/transparent-frame.png" alt="">
     </div>
   </div>
+
 </main>
 
 <a class="back-to-bag" href="index.html#bag">
