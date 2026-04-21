@@ -14,7 +14,7 @@ body{overflow-y:auto}
 
 /* ===== INTRO (ring) ===== */
 .intro{
-  position:fixed;inset:0;z-index:100;background:#fff;
+  position:fixed;inset:0;z-index:100;background:#f4ece0;
   display:grid;place-items:center;
   transition:opacity .7s var(--ease),visibility .7s;
   will-change:opacity,transform,filter;
@@ -90,21 +90,22 @@ body{overflow-y:auto}
 /* ===== HERO ===== */
 .hero{
   position:relative;height:100vh;width:100%;
-  overflow:hidden;background:#b8b0a8;
+  overflow:hidden;background:#aca49c;
 }
-.hero-img{
-  position:absolute;inset:0;
-  background:url('assets/chanel-portrait.png') center/cover no-repeat;
-  background-position:50% 28%;
-  transform:scale(1.05);
+/* Cutout photo — anchored to bottom-center */
+.hero-cutout{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  height:96vh;width:auto;max-width:none;
+  object-fit:contain;object-position:bottom center;
+  z-index:1;
+  opacity:0;
 }
-.hero.reveal .hero-img{
-  animation:kenburn 7s var(--ease) forwards;
+.hero.reveal .hero-cutout{
+  animation:cutoutReveal 1.1s .3s var(--ease) forwards;
 }
-@keyframes kenburn{
-  0%{transform:scale(1.18);filter:brightness(.95) blur(6px)}
-  20%{filter:brightness(1) blur(0)}
-  100%{transform:scale(1.05);filter:brightness(.95) blur(0)}
+@keyframes cutoutReveal{
+  0%{opacity:0;transform:translateX(-50%) translateY(18px)}
+  100%{opacity:1;transform:translateX(-50%) translateY(0)}
 }
 
 /* Split name layout — Chanel on left, Holt on right, face in center */
@@ -120,8 +121,9 @@ body{overflow-y:auto}
   font-family:var(--script);font-weight:400;
   font-size:clamp(72px,13vw,190px);line-height:1;
   color:#fff;
-  text-shadow:0 4px 24px rgba(0,0,0,.35);
-  top:44%;transform:translateY(-50%);
+  text-shadow:0 4px 28px rgba(0,0,0,.4);
+  top:40%;transform:translateY(-50%);
+  z-index:2;
 }
 .hero-name-left{left:3vw}
 .hero-name-right{right:3vw}
@@ -129,18 +131,19 @@ body{overflow-y:auto}
 .hero-tag{
   position:absolute;
   left:3vw;
-  top:calc(44% + clamp(72px,13vw,190px) * .55);
+  top:calc(40% + clamp(72px,13vw,190px) * .55);
   font-family:var(--serif-text);font-style:italic;font-weight:500;
-  font-size:clamp(13px,1.6vw,20px);
+  font-size:clamp(16px,2vw,26px);
   color:#c0291c;
-  text-shadow:0 1px 8px rgba(0,0,0,.4);
+  text-shadow:0 1px 8px rgba(0,0,0,.3);
   letter-spacing:.08em;
   white-space:nowrap;
+  z-index:2;
 }
 
 .hero-scroll-hint{
   position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
-  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;
   font-family:var(--serif-text);font-size:13px;letter-spacing:.28em;text-transform:uppercase;
   color:#fff;mix-blend-mode:difference;
   opacity:0;
@@ -152,7 +155,7 @@ body{overflow-y:auto}
 /* ===== BAG ===== */
 .bag{
   min-height:100vh;padding:100px 40px 120px;
-  background:var(--red);
+  background:#5d1212;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
 .bag-head{text-align:center;margin-bottom:30px}
@@ -275,7 +278,7 @@ body{overflow-y:auto}
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-img"></div>
+  <img class="hero-cutout" src="assets/chanel-new-hero.png" alt="" aria-hidden="true">
   <div class="hero-name-wrap" aria-hidden="true">
     <span class="hero-name-left">Chanel</span>
     <span class="hero-name-right">Holt</span>

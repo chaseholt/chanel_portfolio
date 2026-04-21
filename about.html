@@ -28,7 +28,7 @@ body{background:var(--cream)}
   display:flex;flex-direction:column;justify-content:center;
   font-family:var(--serif-display);font-weight:800;
   font-size:clamp(56px,8vw,110px);line-height:.95;
-  color:rgba(26,23,20,.12);letter-spacing:-.02em;
+  color:rgba(26,23,20,.28);letter-spacing:-.02em;
   padding-left:32px;white-space:nowrap;
   user-select:none;
 }
@@ -36,13 +36,14 @@ body{background:var(--cream)}
 
 .about-cutout{
   position:relative;z-index:2;
-  width:min(400px,80%);
-  /* cutout photo — transparent bg */
+  /* Height drives sizing — 80% of the visible panel height (vh minus nav) */
+  height:calc(80vh - 92px);
+  width:auto;
 }
 .about-cutout img{
-  width:100%;height:auto;display:block;
-  object-fit:contain;
-  filter:drop-shadow(0 30px 50px rgba(20,15,10,.18));
+  height:100%;width:auto;display:block;
+  object-fit:contain;object-position:bottom center;
+  filter:drop-shadow(0 24px 40px rgba(20,15,10,.2));
 }
 
 /* Right — cream bg, bio text */
