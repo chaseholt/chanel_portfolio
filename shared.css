@@ -11,7 +11,7 @@
   --line:#d9cfc0;
   --serif-display: "Bodoni Moda", "Playfair Display", serif;
   --serif-text: "Cormorant Garamond", "Playfair Display", serif;
-  --script: "Pinyon Script", cursive;
+  --script: "Pinyon Script";
   --sans: "Inter", sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
 }
