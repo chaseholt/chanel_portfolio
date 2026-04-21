@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap');
+
 /* ============ SHARED STYLES for Chanel Holt portfolio ============ */
 :root{
   --cream:#F5EFE4;
@@ -42,8 +44,8 @@ button{background:none;border:0;cursor:pointer;color:inherit;font:inherit}
 .nav.on-dark a{color:rgba(245,239,228,.78)}
 .nav.on-dark a.active{color:#fff}
 .nav .brand{
-  font-family:var(--script);
-  font-size:36px;line-height:1;color:var(--ink);padding-top:4px;
+  font-family:'Cinzel Decorative', serif;
+  font-size:20px;letter-spacing:.06em;line-height:1;color:var(--ink);padding-top:2px;
 }
 .nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0}
 .nav-toggle{
