@@ -7,97 +7,232 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
-body{background:#14100e;color:#f5efe4}
-.content-wrap{padding:132px 40px 140px}
-@media (max-width:860px){.content-wrap{padding:106px 20px 100px}}
-.content-wrap .eyebrow{color:var(--rose)}
-.content-wrap .display{color:#f5efe4}
-.content-wrap p.sub{font-family:var(--serif-text);font-size:19px;color:#b9ad9d;max-width:720px;margin:-18px 0 40px}
-.section-head{
-  display:flex;align-items:baseline;gap:20px;margin:60px 0 24px;
-  border-top:1px solid rgba(245,239,228,.12);padding-top:36px;
+body{background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+.content-wrap{
+  padding:110px 40px 120px;
+  max-width:1200px;margin:0 auto;
 }
-.section-head:first-of-type{margin-top:0;border-top:0;padding-top:0}
-.section-head h2{
-  font-family:var(--serif-display);font-size:clamp(32px,4vw,48px);
-  font-weight:700;font-style:italic;color:#f5efe4;margin:0;letter-spacing:-.01em;
+@media (max-width:860px){.content-wrap{padding:90px 20px 100px}}
+
+/* ===== SECTION TITLES ===== */
+.section-title{
+  font-family:var(--serif-display);
+  font-size:clamp(56px,10vw,130px);
+  font-weight:800;letter-spacing:-.025em;line-height:.9;
+  text-align:center;
+  color:var(--ink);
+  margin:0 0 52px;
 }
-.section-head .note{
-  font-family:var(--serif-text);font-size:15px;color:#b9ad9d;letter-spacing:.2em;text-transform:uppercase;
+
+/* ===== CONTENT — Phone Mockups ===== */
+.content-section{margin-bottom:100px}
+
+.phones-row{
+  display:flex;justify-content:center;gap:clamp(20px,4vw,52px);
+  flex-wrap:wrap;
 }
-.videos{display:grid;grid-template-columns:repeat(2,1fr);gap:36px}
+
+/* Pure CSS phone mockup */
+.phone-mockup{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.phone-shell{
+  width:clamp(120px,16vw,190px);
+  aspect-ratio:9/19;
+  background:#111;
+  border-radius:28px;
+  padding:10px 6px;
+  box-shadow:
+    0 30px 60px rgba(20,15,10,.2),
+    0 0 0 1.5px rgba(255,255,255,.08) inset;
+  position:relative;
+  display:flex;flex-direction:column;gap:6px;
+}
+/* Notch */
+.phone-shell::before{
+  content:"";
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);
+  width:28%;height:10px;background:#111;
+  border-radius:0 0 8px 8px;z-index:2;
+}
+/* Volume buttons */
+.phone-shell::after{
+  content:"";
+  position:absolute;left:-3px;top:24%;
+  width:3px;height:30%;background:#222;border-radius:2px 0 0 2px;
+  box-shadow:0 -18px 0 #222, 0 18px 0 #222;
+}
+.phone-screen{
+  flex:1;border-radius:20px;
+  background:linear-gradient(160deg,#d0e8f0 0%,#b8d9e8 40%,#8fc4a8 100%);
+  overflow:hidden;position:relative;
+}
+/* Clouds placeholder */
+.phone-screen::before{
+  content:"";position:absolute;top:18%;left:10%;
+  width:50%;aspect-ratio:2/1;background:rgba(255,255,255,.85);border-radius:999px;
+}
+.phone-screen::after{
+  content:"";position:absolute;bottom:0;left:0;right:0;height:38%;
+  background:linear-gradient(180deg,rgba(90,130,80,.7),rgba(60,100,50,.9));
+  border-radius:0;
+}
+.phone-bottom{
+  height:22px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 10px;
+}
+.phone-bottom::before{
+  content:"";width:38%;height:5px;background:rgba(255,255,255,.15);border-radius:3px;
+}
+.phone-bottom::after{
+  content:"♡ ▷";font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.08em;
+}
+.phone-caption{
+  font-family:var(--serif-text);font-style:italic;
+  font-size:14px;color:var(--muted);
+  letter-spacing:.04em;
+}
+
+/* ===== EVENTS ===== */
+.events-section{margin-bottom:72px}
+
+.events-intro{
+  display:grid;grid-template-columns:2fr 3fr;gap:60px;
+  align-items:center;margin-bottom:60px;
+}
+.events-img-box{
+  aspect-ratio:4/5;
+  background:var(--cream-2);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.events-img-box img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;
+}
+.events-text p{
+  font-family:var(--serif-text);
+  font-size:clamp(17px,1.6vw,21px);
+  line-height:1.75;
+  color:var(--ink-soft);
+  margin:0;
+}
+
+/* ===== VIDEO GRID ===== */
+.videos-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:36px;
+}
 .video-card{display:flex;flex-direction:column;gap:14px}
-.video-frame{position:relative;aspect-ratio:9/16;max-height:72vh;background:#2a221c;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.video-frame{
+  position:relative;aspect-ratio:9/16;max-height:72vh;
+  background:#2a221c;overflow:hidden;
+  box-shadow:0 24px 48px rgba(20,15,10,.12);
+}
 .video-frame video{width:100%;height:100%;object-fit:cover;background:#000}
-.video-meta h3{margin:0;font-family:var(--serif-display);font-size:22px;font-style:italic;font-weight:600;color:#f5efe4}
-.video-meta p{margin:4px 0 0;font-family:var(--serif-text);color:#b9ad9d;font-size:15px;letter-spacing:.02em}
-@media (max-width:860px){.videos{grid-template-columns:1fr}}
+.video-meta h3{
+  margin:0;font-family:var(--serif-display);font-size:20px;
+  font-style:italic;font-weight:600;color:var(--ink);
+}
+.video-meta p{
+  margin:4px 0 0;font-family:var(--serif-text);
+  color:var(--muted);font-size:14px;letter-spacing:.04em;
+}
+
+@media (max-width:860px){
+  .events-intro{grid-template-columns:1fr;gap:30px}
+  .events-img-box{aspect-ratio:16/9}
+  .videos-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body class="dark">
-<nav class="nav on-dark">
-  <a class="brand" href="index.html">Chanel</a>
+<body>
+<nav class="nav">
+  <a class="brand" href="index.html#bag">Chanel</a>
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul>
     <li><a href="about.html">About</a></li>
     <li><a href="experience.html">Experience</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="education.html">Education</a></li>
-    <li><a href="content.html">Content</a></li>
+    <li><a href="content.html" class="active">Content</a></li>
     <li><a href="resume.html">Resume</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html">Work With Me</a></li>
   </ul>
 </nav>
-<main class="page content-wrap container">
-  <p class="eyebrow">previous work</p>
-  <h1 class="display italic">Content &amp; Events</h1>
-  <p class="sub">A selection of content I've created, produced, and directed — brand storytelling, creative direction, and event coverage for Stumble.</p>
 
-  <div class="section-head">
-    <h2>Brand Content</h2>
-    <span class="note">directed · produced</span>
-  </div>
-  <div class="videos">
-    <article class="video-card">
-      <div class="video-frame">
-        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-1.jpg">
-          <source src="assets/video-1.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="video-meta"><h3>The Space Between</h3><p>Brand content · Stumble</p></div>
-    </article>
-    <article class="video-card">
-      <div class="video-frame">
-        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-2.jpg">
-          <source src="assets/video-2.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="video-meta"><h3>The Stumble House Tour</h3><p>Brand content · Stumble</p></div>
-    </article>
-  </div>
+<main class="content-wrap">
 
-  <div class="section-head">
-    <h2>Event Coverage</h2>
-    <span class="note">on-the-ground · activations</span>
-  </div>
-  <div class="videos">
-    <article class="video-card">
-      <div class="video-frame">
-        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-3.jpg">
-          <source src="assets/video-3.mp4" type="video/mp4">
-        </video>
+  <!-- CONTENT -->
+  <section class="content-section">
+    <h1 class="section-title">CONTENT</h1>
+    <div class="phones-row">
+      <div class="phone-mockup">
+        <div class="phone-shell">
+          <div class="phone-screen"></div>
+          <div class="phone-bottom"></div>
+        </div>
+        <span class="phone-caption">Brand storytelling</span>
       </div>
-      <div class="video-meta"><h3>Launch Night</h3><p>Event coverage · Stumble — 200+ attendees</p></div>
-    </article>
-    <article class="video-card">
-      <div class="video-frame">
-        <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-4.jpg">
-          <source src="assets/video-4.mp4" type="video/mp4">
-        </video>
+      <div class="phone-mockup">
+        <div class="phone-shell">
+          <div class="phone-screen"></div>
+          <div class="phone-bottom"></div>
+        </div>
+        <span class="phone-caption">Creative direction</span>
       </div>
-      <div class="video-meta"><h3>Event Feature</h3><p>Event coverage · Stumble</p></div>
-    </article>
-  </div>
+      <div class="phone-mockup">
+        <div class="phone-shell">
+          <div class="phone-screen"></div>
+          <div class="phone-bottom"></div>
+        </div>
+        <span class="phone-caption">Social campaigns</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="events-section" id="event-coverage">
+    <h2 class="section-title">EVENTS</h2>
+    <div class="events-intro">
+      <div class="events-img-box">
+        <img src="assets/poster-3.jpg" alt="Event hosted by Chanel">
+      </div>
+      <div class="events-text">
+        <p>Here are some videos from events I've hosted and fully planned myself. I organize and execute multiple events each year, handling everything from the original idea to the final details. I create the full experience including the itinerary, activities, food, and overall setup. I even design and make the cakes to match the theme. My goal is always to create fun, thoughtful events that feel put together and memorable for everyone there.</p>
+      </div>
+    </div>
+
+    <div class="videos-grid">
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-3.jpg">
+            <source src="assets/video-3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Launch Night</h3>
+          <p>Event coverage · Stumble — 200+ attendees</p>
+        </div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame">
+          <video controls playsinline webkit-playsinline preload="metadata" poster="assets/poster-4.jpg">
+            <source src="assets/video-4.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-meta">
+          <h3>Event Feature</h3>
+          <p>Event coverage · Stumble</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
 </main>
+
 <a class="back-to-bag" href="index.html#bag">
   <svg viewBox="0 0 16 16"><path d="M10 3 L4 8 L10 13"/></svg>
   <span>back to bag</span>
