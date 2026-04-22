@@ -269,6 +269,23 @@ body{overflow-y:auto}
   .hero-name-left,.hero-name-right{font-size:clamp(44px,10vw,100px);top:36%}
   .hero-tag{font-size:clamp(12px,2.8vw,16px);top:calc(36% + clamp(44px,10vw,100px) * .52)}
 }
+
+/* ===== MOBILE HERO: text in front of cutout + tint ===== */
+@media (max-width:640px){
+  /* Push cutout behind text */
+  .hero-cutout{z-index:1}
+
+  /* Tint overlay — sits above cutout, below text */
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    z-index:2;pointer-events:none;
+    background:rgba(20,8,8,.45);
+  }
+
+  /* Bring text and scroll hint in front of tint */
+  .hero-name-wrap{z-index:3}
+  .hero-scroll-hint{z-index:4}
+}
 </style>
 </head>
 <body>
