@@ -367,7 +367,7 @@ body{overflow-y:auto}
   } else {
     phoneStage.addEventListener('click', ()=>endIntro(false));
     skip.addEventListener('click', (e)=>{e.stopPropagation(); endIntro(true);});
-    setTimeout(()=>{ if(!intro.classList.contains('done') && !intro.classList.contains('zooming')) endIntro(false); }, 14000);
+    setTimeout(()=>{ if(!intro.classList.contains('done') && !intro.classList.contains('zooming')) endIntro(false); }, 5000);
   }
 
   if(window.renderBag) window.renderBag(document.getElementById('bag-board'));
